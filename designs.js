@@ -15,5 +15,16 @@ $("#sizePicker").submit(function(event) {
 
 // When size is submitted by the user, call makeGrid()
 function makeGrid(gridHeight, gridWidth) {
-    console.log("Grid Height: " + gridHeight + ", GridWidth: " + gridWidth);
+    var output;
+    var row = "<tr>";
+
+    for (var i = 0; i < gridWidth; i++) {
+        row += "<td></td>";
+    }
+    row += "</tr>";
+
+    for (var i = 0; i < gridHeight; i++) {
+        output += row;
+    }
+    $("#pixel_canvas").append(output);
 }
