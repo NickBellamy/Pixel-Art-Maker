@@ -5,6 +5,10 @@ $("#colorPicker").change(function() {
     colorChoice = $(this).val();
 });
 
+$("#pixel_canvas").on("click", "td", function() {
+    $(this).css("background-color", colorChoice);
+});
+
 // On form Submit pass user values for height and width to makeGrid()
 $("#sizePicker").submit(function(event) {
     var gridHeight = $("#input_height").val();
