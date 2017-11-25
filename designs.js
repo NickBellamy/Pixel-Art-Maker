@@ -1,5 +1,5 @@
 // Select color input
-var colorChoice;
+var colorChoice = $("#colorPicker").val();
 
 $("#colorPicker").change(function() {
     colorChoice = $(this).val();
