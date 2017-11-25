@@ -21,16 +21,13 @@ function clearGrid() {
 
 // When size is submitted by the user, call makeGrid()
 function makeGrid(gridHeight, gridWidth) {
-    var output;
-    var row = "<tr>";
-
-    for (var i = 0; i < gridWidth; i++) {
-        row += "<td></td>";
-    }
-    row += "</tr>";
-
-    for (var i = 0; i < gridHeight; i++) {
-        output += row;
-    }
+  var output;
+  for (var i = 0; i < gridHeight; i++) {
+      output += "<tr>";
+      for (var j = 0; j < gridWidth; j++) {
+          output += "<td></td>";
+      }
+      output += "</tr>";
+  }
     $("#pixel_canvas").append(output);
 }
