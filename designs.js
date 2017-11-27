@@ -4,6 +4,7 @@ var colorChoice = $("#colorPicker").val();
 // Update colorChoice when new colour is picked
 $("#colorPicker").change(function() {
     colorChoice = $(this).val();
+    $("td").css("background-image", "linear-gradient(" + colorChoice + ", " + colorChoice + ")");
 });
 
 // Fill "pixel" with the currently selected colour
