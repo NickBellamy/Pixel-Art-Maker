@@ -4,6 +4,7 @@ var colorChoice = $("#colorPicker").val();
 // Update colorChoice when new colour is picked
 $("#colorPicker").change(function() {
     colorChoice = $(this).val();
+    // Change background image colour to user's choice for transition effect on hover
     $("td").css("background-image", "linear-gradient(" + colorChoice + ", " + colorChoice + ")");
 });
 
@@ -37,4 +38,6 @@ function makeGrid(gridHeight, gridWidth) {
         output += "</tr>";
     }
     $("#pixel_canvas").append(output);
+    // Change background image colour to user's choice for transition effect on hover
+    $("td").css("background-image", "linear-gradient(" + colorChoice + ", " + colorChoice + ")");
 }
