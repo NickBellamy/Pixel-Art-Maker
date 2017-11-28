@@ -40,4 +40,10 @@ function makeGrid(gridHeight, gridWidth) {
     $("#pixel_canvas").append(output);
     // Change background image colour to user's choice for transition effect on hover
     $("td").css("background-image", "linear-gradient(" + colorChoice + ", " + colorChoice + ")");
+    // Bind right click to reset ("delete"), color of td
+    $("td").mousedown(function(e) {
+        if (e.which == 3){
+         $(this).css("background-color", "#fff");
+    }
+    });
 }
