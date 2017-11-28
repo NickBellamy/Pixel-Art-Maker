@@ -8,11 +8,6 @@ $("#colorPicker").change(function() {
     $("td").css("background-image", "linear-gradient(" + colorChoice + ", " + colorChoice + ")");
 });
 
-// Fill "pixel" with the currently selected colour
-$("#pixel_canvas").on("click", "td", function() {
-    $(this).css("background-color", colorChoice);
-});
-
 // Clears grid and passes user defined parameters to makeGrid()
 $("#sizePicker").submit(function(event) {
     var gridHeight = $("#input_height").val();
@@ -40,10 +35,14 @@ function makeGrid(gridHeight, gridWidth) {
     $("#pixel_canvas").append(output);
     // Change background image colour to user's choice for transition effect on hover
     $("td").css("background-image", "linear-gradient(" + colorChoice + ", " + colorChoice + ")");
-    // Bind right click to reset ("delete"), color of td
+    // Bind mouse clicks for <td>s
     $("td").mousedown(function(e) {
         if (e.which == 3) {
+            // Right click resets ("deletes") the pixel by resetting bg colour
             $(this).css("background-color", "#fff");
+        } else {
+            // Left or middle click fills pixel with selected colour
+            $(this).css("background-color", colorChoice);
         }
     });
 }
