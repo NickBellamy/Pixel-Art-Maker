@@ -42,8 +42,8 @@ function makeGrid(gridHeight, gridWidth) {
     $("td").css("background-image", "linear-gradient(" + colorChoice + ", " + colorChoice + ")");
     // Bind right click to reset ("delete"), color of td
     $("td").mousedown(function(e) {
-        if (e.which == 3){
-         $(this).css("background-color", "#fff");
-    }
+        if (e.which == 3) {
+            $(this).css("background-color", "#fff");
+        }
     });
 }
