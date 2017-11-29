@@ -1,3 +1,8 @@
+// Prevent context menu on right click
+$("pixel_canvas").oncontextmenu(function(){
+    return false;
+});
+
 // var to store user's colour selection, initialized to default colorPicker value
 var colorChoice = $("#colorPicker").val();
 
