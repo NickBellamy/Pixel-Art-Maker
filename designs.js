@@ -1,5 +1,5 @@
 // Prevent context menu on right click
-$("pixel_canvas").oncontextmenu(function() {
+$("#pixel_canvas").contextmenu(function() {
     return false;
 })
 
