@@ -1,7 +1,7 @@
 // Prevent context menu on right click
-$("pixel_canvas").oncontextmenu(function(){
+$("pixel_canvas").oncontextmenu(function() {
     return false;
-});
+})
 
 // var to store user's colour selection, initialized to default colorPicker value
 var colorChoice = $("#colorPicker").val();
@@ -11,7 +11,7 @@ $("#colorPicker").change(function() {
     colorChoice = $(this).val();
     // Change background image colour to user's choice for transition effect on hover
     $("td").css("background-image", "linear-gradient(" + colorChoice + ", " + colorChoice + ")");
-});
+})
 
 // Clears grid and passes user defined parameters to makeGrid()
 $("#sizePicker").submit(function(event) {
@@ -20,7 +20,7 @@ $("#sizePicker").submit(function(event) {
     clearGrid();
     makeGrid(gridHeight, gridWidth);
     event.preventDefault();
-});
+})
 
 // Removes any pre-exising grid
 function clearGrid() {
@@ -38,8 +38,10 @@ function makeGrid(gridHeight, gridWidth) {
         output += "</tr>";
     }
     $("#pixel_canvas").append(output);
+
     // Change background image colour to user's choice for transition effect on hover
     $("td").css("background-image", "linear-gradient(" + colorChoice + ", " + colorChoice + ")");
+
     // Bind mouse clicks for <td>s
     $("td").mousedown(function(e) {
         if (e.which == 3) {
