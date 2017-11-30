@@ -6,6 +6,28 @@ $("#pixel_canvas").contextmenu(function() {
 // var to store user's colour selection, initialized to default colorPicker value
 var colorChoice = $("#colorPicker").val();
 
+// vars to store mouse status
+var isLeftMouseDown = false;
+var isRightMouseDown = false;
+
+// Set mouse status on mousedown
+$("body").mousedown(function(e) {
+    if (e.which == 1) {
+        isLeftMouseDown = true;
+    } else if (e.which == 3) {
+        isRightMouseDown = true;
+    }
+})
+
+// Set mouse status on mouseup
+$("body").mouseup(function(e) {
+    if (e.which == 1) {
+        isLeftMouseDown = false;
+    } else if (e.which == 3) {
+        isRightMouseDown = false;
+    }
+})
+
 // Update colorChoice when new colour is picked
 $("#colorPicker").change(function() {
     colorChoice = $(this).val();
@@ -42,13 +64,24 @@ function makeGrid(gridHeight, gridWidth) {
     // Change background image colour to user's choice for transition effect on hover
     $("td").css("background-image", "linear-gradient(" + colorChoice + ", " + colorChoice + ")");
 
-    // Bind mouse clicks for <td>s
+    // Bind mouseover for drag selection over <td>s
+    $("td").mouseover(function(e) {
+        if (isRightMouseDown) {
+            // Right click resets ("deletes") the pixel by resetting bg colour
+            $(this).css("background-color", "#fff");
+        } else if (isLeftMouseDown) {
+            // Left click fills pixel with selected colour
+            $(this).css("background-color", colorChoice);
+        }
+    });
+
+    // Bind mousedown for click selection over <td>s
     $("td").mousedown(function(e) {
         if (e.which == 3) {
             // Right click resets ("deletes") the pixel by resetting bg colour
             $(this).css("background-color", "#fff");
-        } else {
-            // Left or middle click fills pixel with selected colour
+        } else if (e.which == 1) {
+            // Left click fills pixel with selected colour
             $(this).css("background-color", colorChoice);
         }
     });
