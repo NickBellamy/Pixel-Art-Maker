@@ -16,6 +16,32 @@ h2:first-of-type {
     margin-top: 0.5em;
 }
 
+.wrapper {
+    display: flex;
+}
+
+#left {
+    text-align: right;
+    order: 1;
+}
+
+#center {
+    order: 2;
+}
+
+#right {
+    text-align: left;
+    order: 3;
+}
+
+.side {
+    padding: 6px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    flex: 1 auto;
+}
+
 table,
 tr,
 td {
