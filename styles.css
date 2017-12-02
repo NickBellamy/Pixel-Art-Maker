@@ -42,6 +42,10 @@ h2:first-of-type {
     flex: 1 auto;
 }
 
+#main_content {
+    display: none;
+}
+
 table,
 tr,
 td {

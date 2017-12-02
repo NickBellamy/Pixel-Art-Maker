@@ -85,4 +85,7 @@ function makeGrid(gridHeight, gridWidth) {
             $(this).css("background-color", colorChoice);
         }
     });
+
+    // Make the div containing the add row/column controls show
+    $("#main_content").show();
 }
