@@ -4,9 +4,14 @@ $("#pixel_canvas").contextmenu(function() {
 })
 
 // Event handler for adding rows and columns
-// Currently logs out parent id for debugging
-$("a").click(function() {
-    alert($(this).parent().attr("id"));
+$("#main_content a").click(function() {
+    var parentId = $(this).parent().attr("id");
+
+    if (parentId == "top" || parentId == "bottom"){
+        addRow(parentId);
+    } else {
+        addColumn(parentId);
+    }
 })
 
 // var to store user's colour selection, initialized to default colorPicker value
@@ -94,4 +99,12 @@ function makeGrid(gridHeight, gridWidth) {
 
     // Make the div containing the add row/column controls show
     $("#main_content").show();
+}
+
+function addRow(parentId){
+    alert("Add row on " + parentId);
+}
+
+function addColumn(parentId){
+    alert("Add column on " + parentId);
 }
