@@ -108,7 +108,19 @@ function setupTableBindings() {
 }
 
 function addRow(parentId) {
-    alert("Add row on " + parentId);
+    var newRow = "<tr>";
+    var gridWidth = $("#input_width").val();
+
+    for (var i = 0; i < gridWidth; i++) {
+        newRow += "<td></td>"
+    }
+    newRow += "</tr>";
+
+    if (parentId == "top") {
+        $("#pixel_canvas").prepend(newRow);
+    } else {
+        $("#pixel_canvas").append(newRow);
+    }
     // Bind event handlers to table elements
     setupTableBindings();
 }
