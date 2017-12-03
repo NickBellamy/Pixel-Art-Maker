@@ -123,6 +123,9 @@ function addRow(parentId) {
     }
     // Bind event handlers to table elements
     setupTableBindings();
+
+    // Increment the grid height input by one
+    $("#input_height").val(parseInt($("#input_height").val()) + 1);
 }
 
 function addColumn(parentId) {
