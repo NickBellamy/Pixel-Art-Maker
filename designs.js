@@ -3,6 +3,12 @@ $("#pixel_canvas").contextmenu(function() {
     return false;
 })
 
+// Event handler for adding rows and columns
+// Currently logs out parent id for debugging
+$("a").click(function() {
+    alert($(this).parent().attr("id"));
+})
+
 // var to store user's colour selection, initialized to default colorPicker value
 var colorChoice = $("#colorPicker").val();
 
