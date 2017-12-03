@@ -48,10 +48,8 @@ $("#colorPicker").change(function() {
 
 // Clears grid and passes user defined parameters to makeGrid()
 $("#sizePicker").submit(function(event) {
-    var gridHeight = $("#input_height").val();
-    var gridWidth = $("#input_width").val();
     clearGrid();
-    makeGrid(gridHeight, gridWidth);
+    makeGrid();
     event.preventDefault();
 })
 
@@ -61,7 +59,9 @@ function clearGrid() {
 }
 
 // Draws grid using passed parameters
-function makeGrid(gridHeight, gridWidth) {
+function makeGrid() {
+    var gridHeight = $("#input_height").val();
+    var gridWidth = $("#input_width").val();
     var output;
     for (var i = 0; i < gridHeight; i++) {
         output += "<tr>";
