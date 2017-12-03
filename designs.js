@@ -7,7 +7,7 @@ $("#pixel_canvas").contextmenu(function() {
 $("#main_content a").click(function() {
     var parentId = $(this).parent().attr("id");
 
-    if (parentId == "top" || parentId == "bottom"){
+    if (parentId == "top" || parentId == "bottom") {
         addRow(parentId);
     } else {
         addColumn(parentId);
@@ -72,6 +72,15 @@ function makeGrid(gridHeight, gridWidth) {
     }
     $("#pixel_canvas").append(output);
 
+    // Bind event handlers to table elements
+    setupTableBindings();
+
+    // Make the div containing the add row/column controls show
+    $("#main_content").show();
+}
+
+// Bind event handlers to table elements
+function setupTableBindings() {
     // Change background image colour to user's choice for transition effect on hover
     $("td").css("background-image", "linear-gradient(" + colorChoice + ", " + colorChoice + ")");
 
@@ -96,15 +105,16 @@ function makeGrid(gridHeight, gridWidth) {
             $(this).css("background-color", colorChoice);
         }
     });
-
-    // Make the div containing the add row/column controls show
-    $("#main_content").show();
 }
 
-function addRow(parentId){
+function addRow(parentId) {
     alert("Add row on " + parentId);
+    // Bind event handlers to table elements
+    setupTableBindings();
 }
 
-function addColumn(parentId){
+function addColumn(parentId) {
     alert("Add column on " + parentId);
+    // Bind event handlers to table elements
+    setupTableBindings();
 }
