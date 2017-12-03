@@ -129,7 +129,17 @@ function addRow(parentId) {
 }
 
 function addColumn(parentId) {
-    alert("Add column on " + parentId);
+    $("tr").each(function() {
+        if (parentId == "left") {
+            $(this).prepend("<td></td>");
+        } else {
+            $(this).append("<td></td>");
+        }
+    })
+
     // Bind event handlers to table elements
     setupTableBindings();
+
+    // Increment the grid width input by one
+    $("#input_width").val(parseInt($("#input_width").val()) + 1);
 }
