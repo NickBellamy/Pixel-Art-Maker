@@ -17,25 +17,27 @@ $("#main_content a").click(function() {
 // var to store user's colour selection, initialized to default colorPicker value
 var colorChoice = $("#colorPicker").val();
 
-// vars to store mouse status
-var isLeftMouseDown = false;
-var isRightMouseDown = false;
+// Namespace to store mouse button state
+var mouseState = {
+    isLeftMouseDown: false,
+    isRightMouseDown: false
+}
 
 // Set mouse status on mousedown
 $("body").mousedown(function(e) {
     if (e.which == 1) {
-        isLeftMouseDown = true;
+        mouseState.isLeftMouseDown = true;
     } else if (e.which == 3) {
-        isRightMouseDown = true;
+        mouseState.isRightMouseDown = true;
     }
 })
 
 // Set mouse status on mouseup
 $("body").mouseup(function(e) {
     if (e.which == 1) {
-        isLeftMouseDown = false;
+        mouseState.isLeftMouseDown = false;
     } else if (e.which == 3) {
-        isRightMouseDown = false;
+        mouseState.isRightMouseDown = false;
     }
 })
 
@@ -86,10 +88,10 @@ function setupTableBindings() {
 
     // Bind mouseover for drag selection over <td>s
     $("td").mouseover(function(e) {
-        if (isRightMouseDown) {
+        if (mouseState.isRightMouseDown) {
             // Right click resets ("deletes") the pixel by resetting bg colour
             $(this).css("background-color", "#fff");
-        } else if (isLeftMouseDown) {
+        } else if (mouseState.isLeftMouseDown) {
             // Left click fills pixel with selected colour
             $(this).css("background-color", colorChoice);
         }
