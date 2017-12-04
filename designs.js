@@ -14,8 +14,16 @@ $("#main_content a").click(function() {
     }
 })
 
-// var to store user's colour selection, initialized to default colorPicker value
-var colorChoice = $("#colorPicker").val();
+// Namespace to store user's colour selection, initialized to default colorPicker value
+var colorHandler = {
+    color: '#000',
+    setColorChoice: function(colorChoice) {
+        this.color = colorChoice;
+    },
+    setHoverColor: function() {
+        $("td").css("background-image", "linear-gradient(" + this.color + ", " + this.color + ")");
+    }
+}
 
 // Namespace to store mouse button state
 var mouseState = {
@@ -43,10 +51,9 @@ $("body").mouseup(function(e) {
 
 // Update colorChoice when new colour is picked
 $("#colorPicker").change(function() {
-    colorChoice = $(this).val();
-    // Change background image colour to user's choice for transition effect on hover
-    $("td").css("background-image", "linear-gradient(" + colorChoice + ", " + colorChoice + ")");
-})
+    colorHandler.setColorChoice($(this).val());
+    colorHandler.setHoverColor();
+});
 
 // Clears grid and passes user defined parameters to makeGrid()
 $("#sizePicker").submit(function(event) {
@@ -84,7 +91,7 @@ function makeGrid() {
 // Bind event handlers to table elements
 function setupTableBindings() {
     // Change background image colour to user's choice for transition effect on hover
-    $("td").css("background-image", "linear-gradient(" + colorChoice + ", " + colorChoice + ")");
+    colorHandler.setHoverColor();
 
     // Bind mouseover for drag selection over <td>s
     $("td").mouseover(function(e) {
@@ -93,7 +100,7 @@ function setupTableBindings() {
             $(this).css("background-color", "#fff");
         } else if (mouseState.isLeftMouseDown) {
             // Left click fills pixel with selected colour
-            $(this).css("background-color", colorChoice);
+            $(this).css("background-color", colorHandler.color);
         }
     });
 
@@ -104,7 +111,7 @@ function setupTableBindings() {
             $(this).css("background-color", "#fff");
         } else if (e.which == 1) {
             // Left click fills pixel with selected colour
-            $(this).css("background-color", colorChoice);
+            $(this).css("background-color", colorHandler.color);
         }
     });
 }
