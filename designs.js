@@ -3,6 +3,11 @@ $("#pixel_canvas").contextmenu(function() {
     return false;
 })
 
+// Prevent accidental dragging of pixel grid
+$("#pixel_canvas").on("dragstart", function(e) {
+    e.preventDefault();
+})
+
 // Event handler for adding rows and columns
 $("#main_content a").click(function() {
     var parentId = $(this).parent().attr("id");
