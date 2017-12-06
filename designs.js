@@ -15,6 +15,24 @@ $("#main_content a").click(function() {
     parentId == "top" || parentId == "bottom" ? addRow(parentId) : addColumn(parentId);
 })
 
+// Bind WASD keys to row / column creation
+$("body").keypress(function(e) {
+    switch (e.which) {
+        case 119: // W
+            addRow("top");
+            break;
+        case 97: // A
+            addColumn("left");
+            break;
+        case 115: // S
+            addRow("bottom");
+            break;
+        case 100: // D
+            addColumn("right");
+            break;
+    }
+})
+
 // Namespace to store user's colour selection, initialized to default colorPicker value
 var colorHandler = {
     color: $("#colorPicker").val(),
