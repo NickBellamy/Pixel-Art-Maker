@@ -17,7 +17,7 @@ $("#main_content a").click(function() {
 
 // Namespace to store user's colour selection, initialized to default colorPicker value
 var colorHandler = {
-    color: '#000',
+    color: $("#colorPicker").val(),
     setColorChoice: function(colorChoice) {
         this.color = colorChoice;
     },
