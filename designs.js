@@ -136,7 +136,7 @@ function setupTableBindings() {
 
 function addRow(parentId) {
     var newRow = "<tr>";
-    var gridWidth = $("#input_width").val();
+    var gridWidth = $("#pixel_canvas").find("tr:first td").length;
 
     for (var i = 0; i < gridWidth; i++) {
         newRow += "<td></td>"
@@ -149,10 +149,12 @@ function addRow(parentId) {
     setupTableBindings();
 
     // Increment the grid height input by one
-    $("#input_height").val(parseInt($("#input_height").val()) + 1);
+    $("#input_height").val(gridWidth++);
 }
 
 function addColumn(parentId) {
+    var gridHeight = $("#pixel_canvas tr").length;
+
     $("tr").each(function() {
         parentId == "left" ? $(this).prepend("<td></td>") : $(this).append("<td></td>");
     })
@@ -161,5 +163,5 @@ function addColumn(parentId) {
     setupTableBindings();
 
     // Increment the grid width input by one
-    $("#input_width").val(parseInt($("#input_width").val()) + 1);
+    $("#input_width").val(gridHeight++);
 }
