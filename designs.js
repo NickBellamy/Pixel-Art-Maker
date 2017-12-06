@@ -12,11 +12,7 @@ $("#pixel_canvas").on("dragstart", function(e) {
 $("#main_content a").click(function() {
     var parentId = $(this).parent().attr("id");
 
-    if (parentId == "top" || parentId == "bottom") {
-        addRow(parentId);
-    } else {
-        addColumn(parentId);
-    }
+    parentId == "top" || parentId == "bottom" ? addRow(parentId) : addColumn(parentId);
 })
 
 // Namespace to store user's colour selection, initialized to default colorPicker value
@@ -130,11 +126,8 @@ function addRow(parentId) {
     }
     newRow += "</tr>";
 
-    if (parentId == "top") {
-        $("#pixel_canvas").prepend(newRow);
-    } else {
-        $("#pixel_canvas").append(newRow);
-    }
+    parentId == "top" ? $("#pixel_canvas").prepend(newRow) : $("#pixel_canvas").append(newRow);
+    
     // Bind event handlers to table elements
     setupTableBindings();
 
@@ -144,11 +137,7 @@ function addRow(parentId) {
 
 function addColumn(parentId) {
     $("tr").each(function() {
-        if (parentId == "left") {
-            $(this).prepend("<td></td>");
-        } else {
-            $(this).append("<td></td>");
-        }
+        parentId == "left" ? $(this).prepend("<td></td>") : $(this).append("<td></td>");
     })
 
     // Bind event handlers to table elements
