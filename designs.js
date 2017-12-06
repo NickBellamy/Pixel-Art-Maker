@@ -16,19 +16,18 @@ $("#main_content a").click(function() {
 })
 
 // Bind WASD keys to row / column creation
-// TODO Convert to e.key events as e.which is deprecated
-$("body").keypress(function(e) {
-    switch (e.which) {
-        case 119: // W
+$("body").keydown(function(e) {
+    switch (e.key) {
+        case "w":
             addRow("top");
             break;
-        case 97: // A
+        case "a":
             addColumn("left");
             break;
-        case 115: // S
+        case "s":
             addRow("bottom");
             break;
-        case 100: // D
+        case "d": // D
             addColumn("right");
             break;
     }
@@ -38,9 +37,9 @@ $("body").keypress(function(e) {
 // Unable to sanitise values, as Firefox doesn't store non-valid values to manipulate
 $('input[type=number]').keydown(function(e) {
     // TODO Put valid input keys into own array - include tab and arrow keys
-  if (!(e.key >= "0" && e.key <= "9") && e.key != "Delete" && e.key != "Backspace") {
-    e.preventDefault();
-  }
+    if (!(e.key >= "0" && e.key <= "9") && e.key != "Delete" && e.key != "Backspace") {
+        e.preventDefault();
+    }
 });
 
 // Namespace to store user's colour selection, initialized to default colorPicker value
