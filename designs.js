@@ -29,25 +29,24 @@ var colorHandler = {
 // Namespace to store mouse button state
 var mouseState = {
     isLeftMouseDown: false,
-    isRightMouseDown: false
+    isRightMouseDown: false,
+    toggleButton: function(button) {
+        if (button == 1) {
+            this.isLeftMouseDown = !(this.isLeftMouseDown);
+        } else if (button == 3) {
+            this.isRightMouseDown = !(this.isRightMouseDown);
+        }
+    }
 }
 
 // Set mouse status on mousedown
 $("body").mousedown(function(e) {
-    if (e.which == 1) {
-        mouseState.isLeftMouseDown = true;
-    } else if (e.which == 3) {
-        mouseState.isRightMouseDown = true;
-    }
+    mouseState.toggleButton(e.which);
 })
 
 // Set mouse status on mouseup
 $("body").mouseup(function(e) {
-    if (e.which == 1) {
-        mouseState.isLeftMouseDown = false;
-    } else if (e.which == 3) {
-        mouseState.isRightMouseDown = false;
-    }
+    mouseState.toggleButton(e.which);
 })
 
 // Update colorChoice when new colour is picked
@@ -127,7 +126,7 @@ function addRow(parentId) {
     newRow += "</tr>";
 
     parentId == "top" ? $("#pixel_canvas").prepend(newRow) : $("#pixel_canvas").append(newRow);
-    
+
     // Bind event handlers to table elements
     setupTableBindings();
 
