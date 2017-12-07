@@ -72,6 +72,12 @@ var mouseState = {
             this.isLeftMouseDown = !(this.isLeftMouseDown);
         } else if (button === 3) {
             this.isRightMouseDown = !(this.isRightMouseDown);
+            if (this.isRightMouseDown) {
+                // Set cursor to the eraser
+                $("table:hover").css("cursor", "url(cursors/eraser.cur), auto");
+            } else {
+                $("table:hover").css("cursor", "url(cursors/pencil.cur), auto");
+            }
         }
     }
 }
@@ -146,20 +152,11 @@ function setupTableBindings() {
         if (e.which === 3) {
             // Right click resets ("deletes") the pixel by resetting bg colour
             $(this).css("background-color", "#fff");
-            // Set cursor to the eraser
-            $("table:hover").css("cursor", "url(cursors/eraser.cur), auto");
         } else if (e.which === 1) {
             // Left click fills pixel with selected colour
             $(this).css("background-color", colorHandler.color);
         }
     });
-
-    $("td").mouseup(function(e) {
-        if (e.which === 3) {
-            // Set cursor back to the pencil
-            $("table:hover").css("cursor", "url(cursors/pencil.cur), auto");
-        }
-    })
 }
 
 function addRow(parentId) {
