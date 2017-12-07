@@ -161,7 +161,7 @@ function setupTableBindings() {
 
 function addRow(parentId) {
     var newRow = "<tr>";
-    var gridWidth = $("#pixel_canvas").find("tr:first td").length;
+    var gridWidth = $("tr:first td").length;
 
     for (var i = 0; i < gridWidth; i++) {
         newRow += "<td></td>"
@@ -191,9 +191,9 @@ function addColumn(parentId) {
 
 function removeRow(parentId) {
     if (parentId === "top") {
-        $("#pixel_canvas tr:first").remove();
+        $("tr:first").remove();
     } else {
-        $("#pixel_canvas tr:last").remove();
+        $("tr:last").remove();
     }
 
     // Decrement the grid height input by one
@@ -201,7 +201,7 @@ function removeRow(parentId) {
 }
 
 function removeColumn(parentId) {
-    var gridWidth = $("#pixel_canvas").find("tr:first td").length;
+    var gridWidth = $("tr:first td").length;
     $("tr").each(function() {
         if (parentId === "left") {
             $(this).find("td:eq(0)").remove()
