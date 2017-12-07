@@ -13,10 +13,10 @@ $("#main_content a").click(function() {
     var parentId = $(this).parent().attr("id");
     var classFunction = $(this).attr("class");
 
-    if (classFunction == "add") {
-        parentId == "top" || parentId == "bottom" ? addRow(parentId) : addColumn(parentId);
-    } else if (classFunction == "remove") {
-        parentId == "top" || parentId == "bottom" ? removeRow(parentId) : removeColumn(parentId);
+    if (classFunction === "add") {
+        parentId === "top" || parentId === "bottom" ? addRow(parentId) : addColumn(parentId);
+    } else if (classFunction === "remove") {
+        parentId === "top" || parentId === "bottom" ? removeRow(parentId) : removeColumn(parentId);
     }
 })
 
@@ -47,7 +47,7 @@ $('input[type=number]').keydown(function(e) {
         validKeys.push(i.toString());
     }
     // Check if key is in valid key array, if not, prevent it from being entered
-    if ($.inArray(e.key, validKeys) == -1) {
+    if ($.inArray(e.key, validKeys) === -1) {
         e.preventDefault();
     }
 });
@@ -68,9 +68,9 @@ var mouseState = {
     isLeftMouseDown: false,
     isRightMouseDown: false,
     toggleButton: function(button) {
-        if (button == 1) {
+        if (button === 1) {
             this.isLeftMouseDown = !(this.isLeftMouseDown);
-        } else if (button == 3) {
+        } else if (button === 3) {
             this.isRightMouseDown = !(this.isRightMouseDown);
         }
     }
@@ -143,10 +143,10 @@ function setupTableBindings() {
 
     // Bind mousedown for click selection over <td>s
     $("td").mousedown(function(e) {
-        if (e.which == 3) {
+        if (e.which === 3) {
             // Right click resets ("deletes") the pixel by resetting bg colour
             $(this).css("background-color", "#fff");
-        } else if (e.which == 1) {
+        } else if (e.which === 1) {
             // Left click fills pixel with selected colour
             $(this).css("background-color", colorHandler.color);
         }
@@ -162,7 +162,7 @@ function addRow(parentId) {
     }
     newRow += "</tr>";
 
-    parentId == "top" ? $("#pixel_canvas").prepend(newRow) : $("#pixel_canvas").append(newRow);
+    parentId === "top" ? $("#pixel_canvas").prepend(newRow) : $("#pixel_canvas").append(newRow);
 
     // Bind event handlers to table elements
     setupTableBindings();
@@ -173,7 +173,7 @@ function addRow(parentId) {
 
 function addColumn(parentId) {
     $("tr").each(function() {
-        parentId == "left" ? $(this).prepend("<td></td>") : $(this).append("<td></td>");
+        parentId === "left" ? $(this).prepend("<td></td>") : $(this).append("<td></td>");
     })
 
     // Bind event handlers to table elements
@@ -184,7 +184,7 @@ function addColumn(parentId) {
 }
 
 function removeRow(parentId) {
-    if (parentId == "top") {
+    if (parentId === "top") {
         $("#pixel_canvas tr:first").remove();
     } else {
         $("#pixel_canvas tr:last").remove();
@@ -197,7 +197,7 @@ function removeRow(parentId) {
 function removeColumn(parentId) {
     var gridWidth = $("#pixel_canvas").find("tr:first td").length;
     $("tr").each(function() {
-        if (parentId == "left") {
+        if (parentId === "left") {
             $(this).find("td:eq(0)").remove()
         } else {
             $(this).find("td:eq(" + (gridWidth - 1).toString() + ")").remove();
