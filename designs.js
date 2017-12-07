@@ -183,10 +183,18 @@ function addColumn(parentId) {
     $("#input_width").val(parseInt($("#input_width").val()) + 1);
 }
 
-function removeColumn(parentId) {
-    alert("Remove column from: " + parentId);
+function removeRow(parentId) {
+    if (parentId == "top") {
+        $("#pixel_canvas tr:first").remove();
+    } else {
+        $("#pixel_canvas tr:last").remove();
+    }
+
+    // Decrement the grid height input by one
+    $("#input_height").val(parseInt($("#input_height").val()) - 1);
 }
 
-function removeRow(parentId) {
-    alert("Remove row from: " + parentId);
+function removeColumn(parentId) {
+    // Testing alert
+    alert("Remove column from: " + parentId);
 }
