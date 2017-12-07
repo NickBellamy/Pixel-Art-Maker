@@ -57,6 +57,10 @@ table {
     margin: 0 auto;
 }
 
+table:hover {
+    cursor: url(cursors/pencil.cur), auto;
+}
+
 tr {
     height: 20px;
 }
