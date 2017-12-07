@@ -36,8 +36,13 @@ $("body").keydown(function(e) {
 // Restrict keys available on input fields
 // Unable to sanitise values, as Firefox doesn't store non-valid values to manipulate
 $('input[type=number]').keydown(function(e) {
-    // TODO Put valid input keys into own array - include tab and arrow keys
-    if (!(e.key >= "0" && e.key <= "9") && e.key != "Delete" && e.key != "Backspace") {
+    var validKeys = ["Delete", "Backspace", "Tab", "ArrowLeft", "ArrowRight", "Enter"];
+    // Add "0" to "9" to validKeys
+    for (var i = 0; i <= 9; i++) {
+        validKeys.push(i.toString());
+    }
+    // Check if key is in valid key array, if not, prevent it from being entered
+    if ($.inArray(e.key, validKeys) == -1) {
         e.preventDefault();
     }
 });
