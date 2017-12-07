@@ -210,5 +210,10 @@ function removeColumn(parentId) {
 
 function changeInputValue(inputType, change) {
     $(inputType).val(parseInt($(inputType).val()) + change);
-    $(inputType).val() <= 0 ? $("#main_content").hide() : $("#main_content").show();
+
+    // Hide #main_content if the inputType is less than 0
+    if ($(inputType).val() <= 0)
+    {
+        $("#main_content").hide();
+    }
 }
