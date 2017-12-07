@@ -11,8 +11,11 @@ $("#pixel_canvas").on("dragstart", function(e) {
 // Event handler for adding rows and columns
 $("#main_content a").click(function() {
     var parentId = $(this).parent().attr("id");
+    var classFunction = $(this).attr("class");
 
-    parentId == "top" || parentId == "bottom" ? addRow(parentId) : addColumn(parentId);
+    if (classFunction == "add") {
+        parentId == "top" || parentId == "bottom" ? addRow(parentId) : addColumn(parentId);
+    }
 })
 
 // Bind WASD keys to row / column creation
