@@ -8,13 +8,15 @@ $("#pixel_canvas").on("dragstart", function(e) {
     e.preventDefault();
 })
 
-// Event handler for adding rows and columns
+// Event handler for adding and removing rows and columns
 $("#main_content a").click(function() {
     var parentId = $(this).parent().attr("id");
     var classFunction = $(this).attr("class");
 
     if (classFunction == "add") {
         parentId == "top" || parentId == "bottom" ? addRow(parentId) : addColumn(parentId);
+    } else if (classFunction == "remove") {
+        parentId == "top" || parentId == "bottom" ? removeRow(parentId) : removeColumn(parentId);
     }
 })
 
@@ -179,4 +181,12 @@ function addColumn(parentId) {
 
     // Increment the grid width input by one
     $("#input_width").val(parseInt($("#input_width").val()) + 1);
+}
+
+function removeColumn(parentId) {
+    alert("Remove column from: " + parentId);
+}
+
+function removeRow(parentId) {
+    alert("Remove row from: " + parentId);
 }
