@@ -99,10 +99,10 @@ $("#colorPicker").change(function() {
 });
 
 // Clears grid and passes user defined parameters to makeGrid()
-$("#sizePicker").submit(function(event) {
+$("#sizePicker").submit(function(e) {
     clearGrid();
     makeGrid();
-    event.preventDefault();
+    e.preventDefault();
 })
 
 // Removes any pre-exising grid
