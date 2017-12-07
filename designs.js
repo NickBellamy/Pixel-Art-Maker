@@ -195,6 +195,15 @@ function removeRow(parentId) {
 }
 
 function removeColumn(parentId) {
-    // Testing alert
-    alert("Remove column from: " + parentId);
+    var gridWidth = $("#pixel_canvas").find("tr:first td").length;
+    $("tr").each(function() {
+        if (parentId == "left") {
+            $(this).find("td:eq(0)").remove()
+        } else {
+            $(this).find("td:eq(" + (gridWidth - 1).toString() + ")").remove();
+        }
+    })
+
+    // Decrement the grid width input by one
+    $("#input_width").val(parseInt($("#input_width").val()) - 1);
 }
