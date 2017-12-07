@@ -168,7 +168,7 @@ function addRow(parentId) {
     setupTableBindings();
 
     // Increment the grid height input by one
-    $("#input_height").val(parseInt($("#input_height").val()) + 1);
+    changeInputValue("#input_height", 1);
 }
 
 function addColumn(parentId) {
@@ -180,7 +180,7 @@ function addColumn(parentId) {
     setupTableBindings();
 
     // Increment the grid width input by one
-    $("#input_width").val(parseInt($("#input_width").val()) + 1);
+    changeInputValue("#input_width", 1);
 }
 
 function removeRow(parentId) {
@@ -191,7 +191,7 @@ function removeRow(parentId) {
     }
 
     // Decrement the grid height input by one
-    $("#input_height").val(parseInt($("#input_height").val()) - 1);
+    changeInputValue("#input_height", -1);
 }
 
 function removeColumn(parentId) {
@@ -205,5 +205,10 @@ function removeColumn(parentId) {
     })
 
     // Decrement the grid width input by one
-    $("#input_width").val(parseInt($("#input_width").val()) - 1);
+    changeInputValue("#input_width", -1);
+}
+
+function changeInputValue(inputType, change) {
+    $(inputType).val(parseInt($(inputType).val()) + change);
+    $(inputType).val() <= 0 ? $("#main_content").hide() : $("#main_content").show();
 }
