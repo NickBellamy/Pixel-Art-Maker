@@ -60,6 +60,9 @@ var colorHandler = {
     },
     setHoverColor: function() {
         $("td").css("background-image", "linear-gradient(" + this.color + ", " + this.color + ")");
+    },
+    noHoverColor: function() {
+        $("td").css("background-image", "none");
     }
 }
 
@@ -75,8 +78,12 @@ var mouseState = {
             if (this.isRightMouseDown) {
                 // Set cursor to the eraser
                 $("table:hover").css("cursor", "url(cursors/eraser.cur), auto");
+                // Remove hover effect
+                colorHandler.noHoverColor();
             } else {
                 $("table:hover").css("cursor", "url(cursors/pencil.cur), auto");
+                // Add hover effects
+                colorHandler.setHoverColor();
             }
         }
     }
