@@ -24,18 +24,34 @@ $("#main_content a").click(function(e) {
 
 // Bind WASD keyboard controls
 $("body").keydown(function(e) {
-    switch (e.key) {
-        case "w":
-            addRow("top");
+    switch (e.which) {
+        case 87: // W
+            if (e.shiftKey) {
+                removeRow("top");
+            } else {
+                addRow("top");
+            }
             break;
-        case "a":
-            addColumn("left");
+        case 65: // A
+            if (e.shiftKey) {
+                removeColumn("left");
+            } else {
+                addColumn("left");
+            }
             break;
-        case "s":
-            addRow("bottom");
+        case 83: // S
+            if (e.shiftKey) {
+                removeRow("bottom");
+            } else {
+                addRow("bottom");
+            }
             break;
-        case "d":
-            addColumn("right");
+        case 68: // D
+            if (e.shiftKey) {
+                removeColumn("right");
+            } else {
+                addColumn("right");
+            }
             break;
     }
 })
