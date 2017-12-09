@@ -20,9 +20,13 @@ $("#main_content a").click(function() {
     }
 })
 
-// Bind WASD keys to row / column creation
+// Bind keyboard controls
 $("body").keydown(function(e) {
     switch (e.key) {
+        case "Shift":
+            $(".add").hide();
+            $(".remove").show();
+            break;
         case "w":
             addRow("top");
             break;
@@ -32,9 +36,16 @@ $("body").keydown(function(e) {
         case "s":
             addRow("bottom");
             break;
-        case "d": // D
+        case "d":
             addColumn("right");
             break;
+    }
+})
+
+$("body").keyup(function(e) {
+    if (e.key === "Shift") {
+        $(".remove").hide();
+        $(".add").show();
     }
 })
 

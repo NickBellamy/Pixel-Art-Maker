@@ -42,6 +42,10 @@ h2:first-of-type {
     flex: 1 auto;
 }
 
+.remove {
+    display: none;
+}
+
 #main_content {
     display: none;
 }
