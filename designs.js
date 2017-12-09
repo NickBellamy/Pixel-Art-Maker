@@ -4,7 +4,7 @@ $("#pixel_canvas").contextmenu(function() {
 })
 
 // Prevent accidental dragging of pixel grid
-$("#pixel_canvas").on("dragstart", function(e) {
+$("body").on("dragstart", function(e) {
     e.preventDefault();
 })
 
