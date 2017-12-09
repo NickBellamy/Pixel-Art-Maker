@@ -9,7 +9,7 @@ $("#pixel_canvas").on("dragstart", function(e) {
 })
 
 // Event handler for adding and removing rows and columns
-$("#main_content a").click(function() {
+$("#main_content a").click(function(e) {
     var parentId = $(this).parent().attr("id");
     var classFunction = $(this).attr("class");
 
@@ -17,6 +17,8 @@ $("#main_content a").click(function() {
         parentId === "top" || parentId === "bottom" ? addRow(parentId) : addColumn(parentId);
     } else if (classFunction === "remove") {
         parentId === "top" || parentId === "bottom" ? removeRow(parentId) : removeColumn(parentId);
+        // Prevent opening in new window when shift key is held
+        e.preventDefault();
     }
 })
 
