@@ -126,7 +126,7 @@ $('input[type=number]').keydown(function(e) {
     ];
 
     // Add '0' - '9' to validKeys
-    for (let i = 0; i < 10; i++){
+    for (let i = 0; i < 10; i++) {
         validKeys.push(i.toString());
     }
 
@@ -143,8 +143,8 @@ let colorHandler = {
     color: $('.color-picker').val(),
     addHoverEffect: function() {
         $('td').css('background-image',
-                    'linear-gradient(' + this.color + ', ' + this.color + ')'
-                   );
+            'linear-gradient(' + this.color + ', ' + this.color + ')'
+        );
     },
     removeHoverEffect: function() {
         $('td').css('background-image', 'none');
@@ -222,7 +222,7 @@ function setupTableBindings() {
     })
 }
 
-function addRow(parentId) {
+function addRow(position) {
     let newRow = '<tr>';
     const GRID_WIDTH = $('tr:first td').length;
 
@@ -231,9 +231,9 @@ function addRow(parentId) {
     }
     newRow += '</tr>';
 
-    if (parentId === 'top') {
+    if (position === 'top') {
         $('.pixel-canvas').prepend(newRow)
-    } else if (parentId === 'bottom') {
+    } else if (position === 'bottom') {
         $('.pixel-canvas').append(newRow);
     }
 
@@ -244,11 +244,11 @@ function addRow(parentId) {
     changeInputValue('.input-height', 1);
 }
 
-function addColumn(parentId) {
+function addColumn(position) {
     $('tr').each(function() {
-        if (parentId === 'left') {
+        if (position === 'left') {
             $(this).prepend('<td></td>');
-        } else if (parentId === 'right') {
+        } else if (position === 'right') {
             $(this).append('<td></td>');
         }
     })
@@ -260,10 +260,10 @@ function addColumn(parentId) {
     changeInputValue('.input-width', 1);
 }
 
-function removeRow(parentId) {
-    if (parentId === 'top') {
+function removeRow(position) {
+    if (position === 'top') {
         $('tr:first').remove();
-    } else {
+    } else if (position === 'bottom') {
         $('tr:last').remove();
     }
 
@@ -271,12 +271,12 @@ function removeRow(parentId) {
     changeInputValue('.input-height', -1);
 }
 
-function removeColumn(parentId) {
+function removeColumn(position) {
     const GRID_WIDTH = $('tr:first td').length;
     $('tr').each(function() {
-        if (parentId === 'left') {
+        if (position === 'left') {
             $(this).find('td:eq(0)').remove()
-        } else {
+        } else if (position === 'right') {
             $(this).find('td:eq(' + (GRID_WIDTH - 1).toString() + ')').remove();
         }
     })
