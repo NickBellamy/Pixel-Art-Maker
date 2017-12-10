@@ -1,7 +1,7 @@
 /* General functionality */
 
 // Prevent context menu on right click
-$('.pixel_canvas').contextmenu(function() {
+$('.pixel-canvas').contextmenu(function() {
     return false;
 })
 
@@ -41,7 +41,7 @@ $('body').on('mousedown mouseup', function(e) {
 })
 
 // Event handler for adding and removing rows and columns
-$('.main_content a').click(function(e) {
+$('.main-content a').click(function(e) {
     const POSITION = $(this).parent().attr('class');
     const MODIFIER = $(this).attr('class');
 
@@ -51,7 +51,7 @@ $('.main_content a').click(function(e) {
         } else {
             addColumn(POSITION);
         }
-    } else if (MODIFIER === 'remove') {
+    } else if (CALLED_FROM_CLASS === 'remove') {
         if (POSITION === 'top' || POSITION === 'bottom') {
             removeRow(POSITION);
         } else {
@@ -140,7 +140,7 @@ $('input[type=number]').keydown(function(e) {
 
 // Namespace to store user's colour selection and handle hover effects
 let colorHandler = {
-    color: $('.colorPicker').val(),
+    color: $('.color-picker').val(),
     addHoverEffect: function() {
         $('td').css('background-image',
                     'linear-gradient(' + this.color + ', ' + this.color + ')'
@@ -152,13 +152,13 @@ let colorHandler = {
 }
 
 // Update colorChoice when new colour is picked
-$('.colorPicker').change(function() {
+$('.color-picker').change(function() {
     colorHandler.color = $(this).val();
     colorHandler.addHoverEffect();
 })
 
 // Clears grid and passes user defined parameters to makeGrid()
-$('.sizePicker').submit(function(e) {
+$('.size-picker').submit(function(e) {
     clearGrid();
     makeGrid();
     e.preventDefault();
@@ -167,7 +167,7 @@ $('.sizePicker').submit(function(e) {
 // Removes any pre-exising grid
 function clearGrid() {
     // Must use while loop to comply with project specification
-    // $('.pixel_canvas').empty(); would be cleaner
+    // $('.pixel-canvas').empty(); would be cleaner
     while ($('table tr').length > 0) {
         $('tr:first').remove();
     }
@@ -175,8 +175,8 @@ function clearGrid() {
 
 // Draws grid using passed parameters
 function makeGrid() {
-    const GRID_HEIGHT = $('.input_height').val();
-    const GRID_WIDTH = $('.input_width').val();
+    const GRID_HEIGHT = $('.input-height').val();
+    const GRID_WIDTH = $('.input-width').val();
     let output = '';
     for (let i = 0; i < GRID_HEIGHT; i++) {
         output += '<tr>';
@@ -185,13 +185,13 @@ function makeGrid() {
         }
         output += '</tr>';
     }
-    $('.pixel_canvas').append(output);
+    $('.pixel-canvas').append(output);
 
     // Bind event handlers to table elements
     setupTableBindings();
 
     // Make the div containing the add row/column controls show
-    $('.main_content').show();
+    $('.main-content').show();
 }
 
 // Bind event handlers to table elements
@@ -232,16 +232,16 @@ function addRow(parentId) {
     newRow += '</tr>';
 
     if (parentId === 'top') {
-        $('.pixel_canvas').prepend(newRow)
+        $('.pixel-canvas').prepend(newRow)
     } else if (parentId === 'bottom') {
-        $('.pixel_canvas').append(newRow);
+        $('.pixel-canvas').append(newRow);
     }
 
     // Bind event handlers to table elements
     setupTableBindings();
 
     // Increment the grid height input by one
-    changeInputValue('.input_height', 1);
+    changeInputValue('.input-height', 1);
 }
 
 function addColumn(parentId) {
@@ -257,7 +257,7 @@ function addColumn(parentId) {
     setupTableBindings();
 
     // Increment the grid width input by one
-    changeInputValue('.input_width', 1);
+    changeInputValue('.input-width', 1);
 }
 
 function removeRow(parentId) {
@@ -268,7 +268,7 @@ function removeRow(parentId) {
     }
 
     // Decrement the grid height input by one
-    changeInputValue('.input_height', -1);
+    changeInputValue('.input-height', -1);
 }
 
 function removeColumn(parentId) {
@@ -282,15 +282,15 @@ function removeColumn(parentId) {
     })
 
     // Decrement the grid width input by one
-    changeInputValue('.input_width', -1);
+    changeInputValue('.input-width', -1);
 }
 
 // Change inputField value by change
 function changeInputValue(inputField, change) {
     $(inputField).val(parseInt($(inputField).val()) + change);
 
-    // Hide .main_content if the inputType is less than 0
+    // Hide .main-content if the inputType is less than 0
     if ($(inputField).val() <= 0) {
-        $('.main_content').hide();
+        $('.main-content').hide();
     }
 }
