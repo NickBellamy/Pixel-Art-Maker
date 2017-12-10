@@ -100,14 +100,14 @@ $("body").keydown(function(e) {
 })
 
 $("body").keydown(function(e) {
-    if (e.shiftKey) {
+    if (e.key === "Shift") {
         $(".remove").show();
         $(".add").hide();
     }
 })
 
 $("body").keyup(function(e) {
-    if (e.shiftKey) {
+    if (e.key === "Shift") {
         $(".remove").hide();
         $(".add").show();
     }
