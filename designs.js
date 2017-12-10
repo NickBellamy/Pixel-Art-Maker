@@ -1,11 +1,48 @@
+/* General functionality */
+
 // Prevent context menu on right click
 $("#pixel_canvas").contextmenu(function() {
     return false;
 })
 
-// Prevent accidental dragging of pixel grid
+// Prevent accidental dragging of elements on page
 $("body").on("dragstart", function(e) {
     e.preventDefault();
+})
+
+/* Mouse Events*/
+
+// Namespace to store mouse button state
+var mouseState = {
+    isLeftMouseDown: false,
+    isRightMouseDown: false,
+    toggleButton: function(button) {
+        if (button === 1) {
+            this.isLeftMouseDown = !(this.isLeftMouseDown);
+        } else if (button === 3) {
+            this.isRightMouseDown = !(this.isRightMouseDown);
+            if (this.isRightMouseDown) {
+                // Set cursor to the eraser
+                $("table:hover").css("cursor", "url(cursors/eraser.cur), auto");
+                // Remove hover effect
+                colorHandler.noHoverColor();
+            } else {
+                $("table:hover").css("cursor", "url(cursors/pencil.cur), auto");
+                // Add hover effects
+                colorHandler.setHoverColor();
+            }
+        }
+    }
+}
+
+// Set mouse status on mousedown
+$("body").mousedown(function(e) {
+    mouseState.toggleButton(e.which);
+})
+
+// Set mouse status on mouseup
+$("body").mouseup(function(e) {
+    mouseState.toggleButton(e.which);
 })
 
 // Event handler for adding and removing rows and columns
@@ -30,6 +67,8 @@ $("#main_content a").click(function(e) {
         e.preventDefault();
     }
 })
+
+/* Keyboard Events */
 
 // Bind WASD keyboard controls
 $("body").keydown(function(e) {
@@ -93,6 +132,8 @@ $('input[type=number]').keydown(function(e) {
     }
 });
 
+/* Main program */
+
 // Namespace to store user's colour selection, initialized to default colorPicker value
 var colorHandler = {
     color: $("#colorPicker").val(),
@@ -106,39 +147,6 @@ var colorHandler = {
         $("td").css("background-image", "none");
     }
 }
-
-// Namespace to store mouse button state
-var mouseState = {
-    isLeftMouseDown: false,
-    isRightMouseDown: false,
-    toggleButton: function(button) {
-        if (button === 1) {
-            this.isLeftMouseDown = !(this.isLeftMouseDown);
-        } else if (button === 3) {
-            this.isRightMouseDown = !(this.isRightMouseDown);
-            if (this.isRightMouseDown) {
-                // Set cursor to the eraser
-                $("table:hover").css("cursor", "url(cursors/eraser.cur), auto");
-                // Remove hover effect
-                colorHandler.noHoverColor();
-            } else {
-                $("table:hover").css("cursor", "url(cursors/pencil.cur), auto");
-                // Add hover effects
-                colorHandler.setHoverColor();
-            }
-        }
-    }
-}
-
-// Set mouse status on mousedown
-$("body").mousedown(function(e) {
-    mouseState.toggleButton(e.which);
-})
-
-// Set mouse status on mouseup
-$("body").mouseup(function(e) {
-    mouseState.toggleButton(e.which);
-})
 
 // Update colorChoice when new colour is picked
 $("#colorPicker").change(function() {
