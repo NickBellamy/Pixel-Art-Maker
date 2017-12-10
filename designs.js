@@ -51,7 +51,7 @@ $('.main-content a').click(function(e) {
         } else {
             addColumn(POSITION);
         }
-    } else if (CALLED_FROM_CLASS === 'remove') {
+    } else if (MODIFIER === 'remove') {
         if (POSITION === 'top' || POSITION === 'bottom') {
             removeRow(POSITION);
         } else {
