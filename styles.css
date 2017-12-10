@@ -20,21 +20,22 @@ h2:first-of-type {
     display: flex;
 }
 
-#left {
+.left {
     text-align: right;
     order: 1;
 }
 
-#center {
+.center {
     order: 2;
 }
 
-#right {
+.right {
     text-align: left;
     order: 3;
 }
 
-.side {
+.left,
+.right {
     padding: 6px;
     display: flex;
     justify-content: center;
@@ -46,7 +47,7 @@ h2:first-of-type {
     display: none;
 }
 
-#main_content {
+.main_content {
     display: none;
 }
 

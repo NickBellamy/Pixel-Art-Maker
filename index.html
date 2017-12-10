@@ -12,35 +12,39 @@
     <h1>Lab: Pixel Art Maker</h1>
 
     <h2>Choose Grid Size</h2>
-    <form id="sizePicker">
+    <form class="sizePicker">
         Grid Height:
-        <input type="number" id="input_height" name="height" min="1" value="1">
+        <input type="number" class="input_height" name="height" min="1" value="1">
         Grid Width:
-        <input type="number" id="input_width" name="width" min="1" value="1">
+        <input type="number" class="input_width" name="width" min="1" value="1">
         <input type="submit">
     </form>
 
     <h2>Pick A Color</h2>
-    <input type="color" id="colorPicker">
+    <input type="color" class="colorPicker">
 
     <h2>Design Canvas</h2>
-    <div id="main_content">
-        <div id="top">
-            <a class="add" href="#">+</a><a class="remove" href="#">-</a>
+    <div class="main_content">
+        <div class="top">
+            <a class="add" href="#">+</a>
+            <a class="remove" href="#">-</a>
         </div>
         <div class="wrapper">
-            <div id="center">
-                <table id="pixel_canvas"></table>
+            <div class="center">
+                <table class="pixel_canvas"></table>
             </div>
-            <div id="left" class="side">
-                <a class="add" href="#">+</a><a class="remove" href="#">-</a>
+            <div class="left">
+                <a class="add" href="#">+</a>
+                <a class="remove" href="#">-</a>
             </div>
-            <div id="right" class="side">
-                <a class="add" href="#">+</a><a class="remove" href="#">-</a>
+            <div class="right">
+                <a class="add" href="#">+</a>
+                <a class="remove" href="#">-</a>
             </div>
         </div>
-        <div id="bottom">
-            <a class="add" href="#">+</a><a class="remove" href="#">-</a>
+        <div class="bottom">
+            <a class="add" href="#">+</a>
+            <a class="remove" href="#">-</a>
         </div>
     </div>
 
