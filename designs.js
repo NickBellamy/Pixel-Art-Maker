@@ -12,7 +12,7 @@ $('body').on('dragstart', function(e) {
 
 /* Mouse Events*/
 
-// Namespace to store mouse button state
+// Namespace to store mouse button and cursor state
 let mouseState = {
     isLeftMouseDown: false,
     isRightMouseDown: false,
@@ -29,28 +29,30 @@ let mouseState = {
             } else {
                 // Set cursor to pencil
                 $('table:hover').css('cursor', 'url(cursors/pencil.cur), auto');
-                colorHandler.addHoverEffect();
+                colorHandler.addHoverEffectColor();
             }
         }
     }
 }
 
-// Toggle mouse status on mousedown / mouseup
+// Toggle mouse button state on mousedown / mouseup
 $('body').on('mousedown mouseup', function(e) {
     mouseState.toggleButton(e.which);
 })
 
-// Event handler for adding and removing rows and columns
+// Event handler for adding and removing rows and columns on click
 $('.main-content a').click(function(e) {
     const POSITION = $(this).parent().attr('class');
     const MODIFIER = $(this).attr('class');
 
+    // If called from add class then add row/column
     if (MODIFIER === 'add') {
         if (POSITION === 'top' || POSITION === 'bottom') {
             addRow(POSITION);
         } else {
             addColumn(POSITION);
         }
+    // Else if called from remove class then remove row/column
     } else if (MODIFIER === 'remove') {
         if (POSITION === 'top' || POSITION === 'bottom') {
             removeRow(POSITION);
@@ -58,7 +60,8 @@ $('.main-content a').click(function(e) {
             removeColumn(POSITION);
         }
 
-        // Prevent opening in new window when shift key is held
+        // Prevent opening in new window when shift key is held as remove links
+        //  are only visible while the shift key is held
         e.preventDefault();
     }
 })
@@ -66,6 +69,10 @@ $('.main-content a').click(function(e) {
 /* Keyboard Events */
 
 // Bind WASD keyboard controls
+// W Adds row to the top, Shift + W removes row from the top
+// A Adds column to the left, Shift + A removes column from the left
+// S Adds row to the bottom, Shift + S removes row from the bottom
+// D Adds column to the right, Shift + D removes column from the right
 $('body').keydown(function(e) {
     switch (e.which) {
         case 87: // W
@@ -99,6 +106,7 @@ $('body').keydown(function(e) {
     }
 })
 
+// Show "Remove" links and hide "Add" links while shift key is down
 $('body').keydown(function(e) {
     if (e.key === 'Shift') {
         $('.remove').show();
@@ -106,6 +114,7 @@ $('body').keydown(function(e) {
     }
 })
 
+// Show "Add" links, and hide "Remove" links when shift key is up
 $('body').keyup(function(e) {
     if (e.key === 'Shift') {
         $('.remove').hide();
@@ -141,7 +150,7 @@ $('input[type=number]').keydown(function(e) {
 // Namespace to store user's colour selection and handle hover effects
 let colorHandler = {
     color: $('.color-picker').val(),
-    addHoverEffect: function() {
+    addHoverEffectColor: function() {
         $('td').css('background-image',
             'linear-gradient(' + this.color + ', ' + this.color + ')'
         );
@@ -151,16 +160,17 @@ let colorHandler = {
     }
 }
 
-// Update colorChoice when new colour is picked
+// Update colorHandler.color and hover effect colour when new colour is picked
 $('.color-picker').change(function() {
     colorHandler.color = $(this).val();
-    colorHandler.addHoverEffect();
+    colorHandler.addHoverEffectColor();
 })
 
 // Clears grid and passes user defined parameters to makeGrid()
 $('.size-picker').submit(function(e) {
     clearGrid();
     makeGrid();
+    // Prevent page reload
     e.preventDefault();
 })
 
@@ -196,13 +206,12 @@ function makeGrid() {
 
 // Bind event handlers to table elements
 function setupTableBindings() {
-    // Add hover effect to all table elements
-    colorHandler.addHoverEffect();
+    colorHandler.addHoverEffectColor();
 
     // Bind mouseover for drag selection over <td>s
     $('td').mouseover(function(e) {
         if (mouseState.isRightMouseDown) {
-            // Right click resets ('deletes') the pixel by resetting bg colour
+            // Right click resets ("deletes") the pixel by resetting bg colour
             $(this).css('background-color', '#fff');
         } else if (mouseState.isLeftMouseDown) {
             // Left click fills pixel with selected colour
@@ -213,7 +222,7 @@ function setupTableBindings() {
     // Bind mousedown for click selection over <td>s
     $('td').mousedown(function(e) {
         if (e.which === 3) {
-            // Right click resets ('deletes') the pixel by resetting bg colour
+            // Right click resets ("deletes") the pixel by resetting bg colour
             $(this).css('background-color', '#fff');
         } else if (e.which === 1) {
             // Left click fills pixel with selected colour
@@ -285,7 +294,7 @@ function removeColumn(position) {
     changeInputValue('.input-width', -1);
 }
 
-// Change inputField value by change
+// Modify inputField value by change, called whenever the grid size changes
 function changeInputValue(inputField, change) {
     $(inputField).val(parseInt($(inputField).val()) + change);
 
