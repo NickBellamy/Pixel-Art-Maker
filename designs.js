@@ -13,7 +13,7 @@ $("body").on("dragstart", function(e) {
 /* Mouse Events*/
 
 // Namespace to store mouse button state
-var mouseState = {
+let mouseState = {
     isLeftMouseDown: false,
     isRightMouseDown: false,
     // Sets mouse state and toggles cursor and hover effects
@@ -42,8 +42,8 @@ $("body").on("mousedown mouseup", function(e) {
 
 // Event handler for adding and removing rows and columns
 $("#main_content a").click(function(e) {
-    var parentId = $(this).parent().attr("id");
-    var classFunction = $(this).attr("class");
+    const parentId = $(this).parent().attr("id");
+    const classFunction = $(this).attr("class");
 
     if (classFunction === "add") {
         if (parentId === "top" || parentId === "bottom") {
@@ -116,11 +116,8 @@ $("body").keyup(function(e) {
 // Restrict keys available on input fields
 // Unable to sanitise values, as Firefox doesn't store non-valid values to manipulate
 $('input[type=number]').keydown(function(e) {
-    var validKeys = ["Delete", "Backspace", "Tab", "ArrowLeft", "ArrowRight", "Enter"];
-    // Add "0" to "9" to validKeys
-    for (var i = 0; i <= 9; i++) {
-        validKeys.push(i.toString());
-    }
+    const validKeys = ["Delete", "Backspace", "Tab", "ArrowLeft", "ArrowRight", "Enter", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+
     // Check if key is in valid key array, if not, prevent it from being entered
     if ($.inArray(e.key, validKeys) === -1) {
         e.preventDefault();
@@ -130,7 +127,7 @@ $('input[type=number]').keydown(function(e) {
 /* Main program */
 
 // Namespace to store user's colour selection, initialized to default colorPicker value
-var colorHandler = {
+let colorHandler = {
     color: $("#colorPicker").val(),
     addHoverEffect: function() {
         $("td").css("background-image", "linear-gradient(" + this.color + ", " + this.color + ")");
@@ -160,12 +157,12 @@ function clearGrid() {
 
 // Draws grid using passed parameters
 function makeGrid() {
-    var gridHeight = $("#input_height").val();
-    var gridWidth = $("#input_width").val();
-    var output;
-    for (var i = 0; i < gridHeight; i++) {
+    const gridHeight = $("#input_height").val();
+    const gridWidth = $("#input_width").val();
+    let output = "";
+    for (let i = 0; i < gridHeight; i++) {
         output += "<tr>";
-        for (var j = 0; j < gridWidth; j++) {
+        for (let j = 0; j < gridWidth; j++) {
             output += "<td></td>";
         }
         output += "</tr>";
@@ -208,10 +205,10 @@ function setupTableBindings() {
 }
 
 function addRow(parentId) {
-    var newRow = "<tr>";
-    var gridWidth = $("tr:first td").length;
+    let newRow = "<tr>";
+    const gridWidth = $("tr:first td").length;
 
-    for (var i = 0; i < gridWidth; i++) {
+    for (let i = 0; i < gridWidth; i++) {
         newRow += "<td></td>"
     }
     newRow += "</tr>";
@@ -257,7 +254,7 @@ function removeRow(parentId) {
 }
 
 function removeColumn(parentId) {
-    var gridWidth = $("tr:first td").length;
+    const gridWidth = $("tr:first td").length;
     $("tr").each(function() {
         if (parentId === "left") {
             $(this).find("td:eq(0)").remove()
