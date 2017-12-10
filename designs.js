@@ -141,7 +141,7 @@ let colorHandler = {
 $("#colorPicker").change(function() {
     colorHandler.color = $(this).val();
     colorHandler.addHoverEffect();
-});
+})
 
 // Clears grid and passes user defined parameters to makeGrid()
 $("#sizePicker").submit(function(e) {
@@ -194,7 +194,7 @@ function setupTableBindings() {
             // Left click fills pixel with selected colour
             $(this).css("background-color", colorHandler.color);
         }
-    });
+    })
 
     // Bind mousedown for click selection over <td>s
     $("td").mousedown(function(e) {
@@ -205,7 +205,7 @@ function setupTableBindings() {
             // Left click fills pixel with selected colour
             $(this).css("background-color", colorHandler.color);
         }
-    });
+    })
 }
 
 function addRow(parentId) {
