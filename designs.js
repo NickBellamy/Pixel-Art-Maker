@@ -216,7 +216,11 @@ function addRow(parentId) {
     }
     newRow += "</tr>";
 
-    parentId === "top" ? $("#pixel_canvas").prepend(newRow) : $("#pixel_canvas").append(newRow);
+    if (parentId === "top") {
+        $("#pixel_canvas").prepend(newRow)
+    } else if (parentId === "bottom") {
+        $("#pixel_canvas").append(newRow);
+    }
 
     // Bind event handlers to table elements
     setupTableBindings();
@@ -227,7 +231,11 @@ function addRow(parentId) {
 
 function addColumn(parentId) {
     $("tr").each(function() {
-        parentId === "left" ? $(this).prepend("<td></td>") : $(this).append("<td></td>");
+        if (parentId === "left") {
+            $(this).prepend("<td></td>");
+        } else if (parentId === "right") {
+            $(this).append("<td></td>");
+        }
     })
 
     // Bind event handlers to table elements
