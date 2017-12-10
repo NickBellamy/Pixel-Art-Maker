@@ -16,6 +16,7 @@ $("body").on("dragstart", function(e) {
 var mouseState = {
     isLeftMouseDown: false,
     isRightMouseDown: false,
+    // Sets mouse state and toggles cursor and hover effects
     toggleButton: function(button) {
         if (button === 1) {
             this.isLeftMouseDown = !(this.isLeftMouseDown);
@@ -24,24 +25,18 @@ var mouseState = {
             if (this.isRightMouseDown) {
                 // Set cursor to the eraser
                 $("table:hover").css("cursor", "url(cursors/eraser.cur), auto");
-                // Remove hover effect
-                colorHandler.noHoverColor();
+                colorHandler.removeHoverEffect();
             } else {
+                // Set cursor to pencil
                 $("table:hover").css("cursor", "url(cursors/pencil.cur), auto");
-                // Add hover effects
-                colorHandler.setHoverColor();
+                colorHandler.addHoverEffect();
             }
         }
     }
 }
 
-// Set mouse status on mousedown
-$("body").mousedown(function(e) {
-    mouseState.toggleButton(e.which);
-})
-
-// Set mouse status on mouseup
-$("body").mouseup(function(e) {
+// Toggle mouse status on mousedown / mouseup
+$("body").on("mousedown mouseup", function(e) {
     mouseState.toggleButton(e.which);
 })
 
@@ -105,14 +100,14 @@ $("body").keydown(function(e) {
 })
 
 $("body").keydown(function(e) {
-    if (e.key === "Shift") {
+    if (e.shiftKey) {
         $(".remove").show();
         $(".add").hide();
     }
 })
 
 $("body").keyup(function(e) {
-    if (e.key === "Shift") {
+    if (e.shiftKey) {
         $(".remove").hide();
         $(".add").show();
     }
@@ -137,21 +132,18 @@ $('input[type=number]').keydown(function(e) {
 // Namespace to store user's colour selection, initialized to default colorPicker value
 var colorHandler = {
     color: $("#colorPicker").val(),
-    setColorChoice: function(colorChoice) {
-        this.color = colorChoice;
-    },
-    setHoverColor: function() {
+    addHoverEffect: function() {
         $("td").css("background-image", "linear-gradient(" + this.color + ", " + this.color + ")");
     },
-    noHoverColor: function() {
+    removeHoverEffect: function() {
         $("td").css("background-image", "none");
     }
 }
 
 // Update colorChoice when new colour is picked
 $("#colorPicker").change(function() {
-    colorHandler.setColorChoice($(this).val());
-    colorHandler.setHoverColor();
+    colorHandler.color = $(this).val();
+    colorHandler.addHoverEffect();
 });
 
 // Clears grid and passes user defined parameters to makeGrid()
@@ -190,7 +182,7 @@ function makeGrid() {
 // Bind event handlers to table elements
 function setupTableBindings() {
     // Change background image colour to user's choice for transition effect on hover
-    colorHandler.setHoverColor();
+    colorHandler.addHoverEffect();
 
     // Bind mouseover for drag selection over <td>s
     $("td").mouseover(function(e) {
@@ -278,11 +270,12 @@ function removeColumn(parentId) {
     changeInputValue("#input_width", -1);
 }
 
-function changeInputValue(inputType, change) {
-    $(inputType).val(parseInt($(inputType).val()) + change);
+// Change inputField value by change
+function changeInputValue(inputField, change) {
+    $(inputField).val(parseInt($(inputField).val()) + change);
 
     // Hide #main_content if the inputType is less than 0
-    if ($(inputType).val() <= 0) {
+    if ($(inputField).val() <= 0) {
         $("#main_content").hide();
     }
 }
