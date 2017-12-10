@@ -114,7 +114,7 @@ $('body').keyup(function(e) {
 })
 
 // Restrict keys available on input fields
-// Unable to sanitise values, as Firefox doesn't store non-valid values to manipulate
+// Can't sanitise values; Firefox doesn't store non-valid values to manipulate
 $('input[type=number]').keydown(function(e) {
     let validKeys = [
         'Delete',
@@ -138,11 +138,13 @@ $('input[type=number]').keydown(function(e) {
 
 /* Main program */
 
-// Namespace to store user's colour selection, initialized to default colorPicker value
+// Namespace to store user's colour selection and handle hover effects
 let colorHandler = {
     color: $('#colorPicker').val(),
     addHoverEffect: function() {
-        $('td').css('background-image', 'linear-gradient(' + this.color + ', ' + this.color + ')');
+        $('td').css('background-image',
+                    'linear-gradient(' + this.color + ', ' + this.color + ')'
+                   );
     },
     removeHoverEffect: function() {
         $('td').css('background-image', 'none');
@@ -194,7 +196,7 @@ function makeGrid() {
 
 // Bind event handlers to table elements
 function setupTableBindings() {
-    // Change background image colour to user's choice for transition effect on hover
+    // Add hover effect to all table elements
     colorHandler.addHoverEffect();
 
     // Bind mouseover for drag selection over <td>s
