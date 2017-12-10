@@ -152,7 +152,11 @@ $("#sizePicker").submit(function(e) {
 
 // Removes any pre-exising grid
 function clearGrid() {
-    $("#pixel_canvas").empty();
+    // Must use while loop to comply with project specification
+    // $("#pixel_canvas").empty(); would be cleaner
+    while ($("table tr").length > 0) {
+        $("tr:first").remove();
+    }
 }
 
 // Draws grid using passed parameters
