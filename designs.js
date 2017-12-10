@@ -14,9 +14,18 @@ $("#main_content a").click(function(e) {
     var classFunction = $(this).attr("class");
 
     if (classFunction === "add") {
-        parentId === "top" || parentId === "bottom" ? addRow(parentId) : addColumn(parentId);
+        if (parentId === "top" || parentId === "bottom") {
+            addRow(parentId);
+        } else {
+            addColumn(parentId);
+        }
     } else if (classFunction === "remove") {
-        parentId === "top" || parentId === "bottom" ? removeRow(parentId) : removeColumn(parentId);
+        if (parentId === "top" || parentId === "bottom") {
+            removeRow(parentId);
+        } else {
+            removeColumn(parentId);
+        }
+
         // Prevent opening in new window when shift key is held
         e.preventDefault();
     }
