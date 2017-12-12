@@ -32,4 +32,5 @@ As well as implementing the baseline functionality, I've also implemented additi
 * You can add rows and columns to the grid by using the `W`, `A`, `S`, and `D` keys
 * Holding `Shift` enters "Delete mode" where the `+` signs are replaced by `-` signs
 * Clicking the `-` on any side of the grid will delete a row or column to that side
+* While holding shift, the cursor changes to an eraser and left clicking a pixel will delete it
 * You can delete rows and columns to the grid while holding down `Shift` and using the `W`, `A`, `S`, and `D` keys

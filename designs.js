@@ -23,15 +23,28 @@ let mouseState = {
         } else if (button === 3) {
             this.isRightMouseDown = !(this.isRightMouseDown);
             if (this.isRightMouseDown) {
-                // Set cursor to the eraser
-                $('table:hover').css('cursor', 'url(cursors/eraser.cur), auto');
-                colorHandler.removeHoverEffect();
+                drawMode.delete();
             } else {
-                // Set cursor to pencil
-                $('table:hover').css('cursor', 'url(cursors/pencil.cur), auto');
-                colorHandler.addHoverEffectColor();
+                drawMode.draw();
             }
         }
+    }
+}
+
+// Handler for draw or delete state
+let drawMode = {
+    isDeleteMode: false,
+    delete: function() {
+        // Set cursor to the eraser
+        $('table:hover').css('cursor', 'url(cursors/eraser.cur), auto');
+        colorHandler.removeHoverEffect();
+        this.isDeleteMode = true;
+    },
+    draw: function() {
+        // Set cursor to pencil
+        $('table:hover').css('cursor', 'url(cursors/pencil.cur), auto');
+        colorHandler.addHoverEffectColor();
+        this.isDeleteMode = false;
     }
 }
 
@@ -52,7 +65,7 @@ $('.main-content a').click(function(e) {
         } else {
             addColumn(POSITION);
         }
-    // Else if called from remove class then remove row/column
+        // Else if called from remove class then remove row/column
     } else if (MODIFIER === 'remove') {
         if (POSITION === 'top' || POSITION === 'bottom') {
             removeRow(POSITION);
@@ -111,6 +124,8 @@ $('body').keydown(function(e) {
     if (e.key === 'Shift') {
         $('.remove').show();
         $('.add').hide();
+        // Enter delete mode while shift is held
+        drawMode.delete();
     }
 })
 
@@ -119,6 +134,8 @@ $('body').keyup(function(e) {
     if (e.key === 'Shift') {
         $('.remove').hide();
         $('.add').show();
+        // Enter draw mode when shift is released
+        drawMode.draw();
     }
 })
 
@@ -210,7 +227,7 @@ function setupTableBindings() {
 
     // Bind mouseover for drag selection over <td>s
     $('td').mouseover(function(e) {
-        if (mouseState.isRightMouseDown) {
+        if (mouseState.isRightMouseDown || (drawMode.isDeleteMode && mouseState.isLeftMouseDown)) {
             // Right click resets ("deletes") the pixel by resetting bg colour
             $(this).css('background-color', '#fff');
         } else if (mouseState.isLeftMouseDown) {
@@ -221,7 +238,7 @@ function setupTableBindings() {
 
     // Bind mousedown for click selection over <td>s
     $('td').mousedown(function(e) {
-        if (e.which === 3) {
+        if (e.which === 3 || (drawMode.isDeleteMode && e.which === 1)) {
             // Right click resets ("deletes") the pixel by resetting bg colour
             $(this).css('background-color', '#fff');
         } else if (e.which === 1) {
