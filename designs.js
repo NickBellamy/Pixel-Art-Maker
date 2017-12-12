@@ -31,23 +31,6 @@ const mouseState = {
     }
 }
 
-// Handler for draw or delete state
-const drawMode = {
-    isDeleteMode: false,
-    delete: function() {
-        // Set cursor to the eraser
-        $('table:hover').css('cursor', 'url(cursors/eraser.cur), auto');
-        colorHandler.removeHoverEffect();
-        this.isDeleteMode = true;
-    },
-    draw: function() {
-        // Set cursor to pencil
-        $('table:hover').css('cursor', 'url(cursors/pencil.cur), auto');
-        colorHandler.addHoverEffectColor();
-        this.isDeleteMode = false;
-    }
-}
-
 // Toggle mouse button state on mousedown / mouseup
 $('body').on('mousedown mouseup', function(e) {
     mouseState.toggleButton(e.which);
@@ -162,6 +145,23 @@ $('input[type=number]').keydown(function(e) {
 });
 
 /* Main program */
+
+// Handler for draw or delete state
+const drawMode = {
+    isDeleteMode: false,
+    delete: function() {
+        // Set cursor to the eraser
+        $('table:hover').css('cursor', 'url(cursors/eraser.cur), auto');
+        colorHandler.removeHoverEffect();
+        this.isDeleteMode = true;
+    },
+    draw: function() {
+        // Set cursor to pencil
+        $('table:hover').css('cursor', 'url(cursors/pencil.cur), auto');
+        colorHandler.addHoverEffectColor();
+        this.isDeleteMode = false;
+    }
+}
 
 // Namespace to store user's colour selection and handle hover effects
 const colorHandler = {
