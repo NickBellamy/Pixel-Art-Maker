@@ -72,11 +72,10 @@ $('.main-content a').click(function(e) {
         } else {
             removeColumn(POSITION);
         }
-
-        // Prevent opening in new window when shift key is held as remove links
-        //  are only visible while the shift key is held
-        e.preventDefault();
     }
+    // Prevent opening in new window when shift key is held on clicking
+    // Prevents reloading page on add/remove row/column click
+    e.preventDefault();
 })
 
 /* Keyboard Events */
