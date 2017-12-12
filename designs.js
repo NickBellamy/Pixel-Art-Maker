@@ -13,7 +13,7 @@ $('body').on('dragstart', function(e) {
 /* Mouse Events*/
 
 // Namespace to store mouse button and cursor state
-let mouseState = {
+const mouseState = {
     isLeftMouseDown: false,
     isRightMouseDown: false,
     // Sets mouse state and toggles cursor and hover effects
@@ -32,7 +32,7 @@ let mouseState = {
 }
 
 // Handler for draw or delete state
-let drawMode = {
+const drawMode = {
     isDeleteMode: false,
     delete: function() {
         // Set cursor to the eraser
@@ -164,7 +164,7 @@ $('input[type=number]').keydown(function(e) {
 /* Main program */
 
 // Namespace to store user's colour selection and handle hover effects
-let colorHandler = {
+const colorHandler = {
     color: $('.color-picker').val(),
     addHoverEffectColor: function() {
         $('td').css('background-image',
