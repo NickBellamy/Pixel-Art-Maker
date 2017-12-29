@@ -10,10 +10,9 @@ h1 {
 
 h2 {
     margin: 1em 0 0.25em;
-}
-
-h2:first-of-type {
-    margin-top: 0.5em;
+    &:first-of-type {
+        margin-top: 0.5em;
+    }
 }
 
 .wrapper {
@@ -60,10 +59,9 @@ td {
 table {
     border-collapse: collapse;
     margin: 0 auto;
-}
-
-table:hover {
-    cursor: url(cursors/pencil.cur), auto;
+    &:hover {
+        cursor: url(cursors/pencil.cur), auto;
+    }
 }
 
 tr {
@@ -77,11 +75,9 @@ td {
     background-repeat: no-repeat;
     background-position: 50% 50%;
     background-size: 0% 0%;
-}
-
-td:hover {
-    -webkit-background-size: 100% 100%;
-    background-size: 100% 100%;
+    &:hover {
+        background-size: 100% 100%;
+    }
 }
 
 input[type=number] {
