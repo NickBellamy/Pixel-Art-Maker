@@ -3,12 +3,12 @@
 // Prevent context menu on right click
 $('.pixel-canvas').contextmenu(function() {
     return false;
-})
+});
 
 // Prevent accidental dragging of elements on page
 $('body').on('dragstart', function(e) {
     e.preventDefault();
-})
+});
 
 /* Mouse Events*/
 
@@ -29,12 +29,12 @@ const mouseState = {
             }
         }
     }
-}
+};
 
 // Toggle mouse button state on mousedown / mouseup
 $('body').on('mousedown mouseup', function(e) {
     mouseState.toggleButton(e.which);
-})
+});
 
 // Event handler for adding and removing rows and columns on click
 $('.main-content a').click(function(e) {
@@ -59,7 +59,7 @@ $('.main-content a').click(function(e) {
     // Prevent opening in new window when shift key is held on clicking
     // Prevents reloading page on add/remove row/column click
     e.preventDefault();
-})
+});
 
 /* Keyboard Events */
 
@@ -99,7 +99,7 @@ $('body').keydown(function(e) {
         }
         break;
     }
-})
+});
 
 // Show "Remove" links and hide "Add" links while shift key is down
 $('body').keydown(function(e) {
@@ -109,7 +109,7 @@ $('body').keydown(function(e) {
         // Enter delete mode while shift is held
         drawMode.delete();
     }
-})
+});
 
 // Show "Add" links, and hide "Remove" links when shift key is up
 $('body').keyup(function(e) {
@@ -119,7 +119,7 @@ $('body').keyup(function(e) {
         // Enter draw mode when shift is released
         drawMode.draw();
     }
-})
+});
 
 // Restrict keys available on input fields
 // Can't sanitise values; Firefox doesn't store non-valid values to manipulate
@@ -161,7 +161,7 @@ const drawMode = {
         colorHandler.addHoverEffectColor();
         this.isDeleteMode = false;
     }
-}
+};
 
 // Namespace to store user's colour selection and handle hover effects
 const colorHandler = {
@@ -174,13 +174,13 @@ const colorHandler = {
     removeHoverEffect: function() {
         $('td').css('background-image', 'none');
     }
-}
+};
 
 // Update colorHandler.color and hover effect colour when new colour is picked
 $('.color-picker').change(function() {
     colorHandler.color = $(this).val();
     colorHandler.addHoverEffectColor();
-})
+});
 
 // Clears grid and passes user defined parameters to makeGrid()
 $('.size-picker').submit(function(e) {
@@ -188,7 +188,7 @@ $('.size-picker').submit(function(e) {
     makeGrid();
     // Prevent page reload
     e.preventDefault();
-})
+});
 
 // Removes any pre-exising grid
 function clearGrid() {
@@ -233,7 +233,7 @@ function setupTableBindings() {
             // Left click fills pixel with selected colour
             $(this).css('background-color', colorHandler.color);
         }
-    })
+    });
 
     // Bind mousedown for click selection over <td>s
     $('td').mousedown(function(e) {
@@ -244,7 +244,7 @@ function setupTableBindings() {
             // Left click fills pixel with selected colour
             $(this).css('background-color', colorHandler.color);
         }
-    })
+    });
 }
 
 function addRow(position) {
@@ -276,7 +276,7 @@ function addColumn(position) {
         } else if (position === 'right') {
             $(this).append('<td></td>');
         }
-    })
+    });
 
     // Bind event handlers to table elements
     setupTableBindings();
@@ -304,7 +304,7 @@ function removeColumn(position) {
         } else if (position === 'right') {
             $(this).find('td:eq(' + (GRID_WIDTH - 1).toString() + ')').remove();
         }
-    })
+    });
 
     // Decrement the grid width input by one
     changeInputValue('.input-width', -1);
