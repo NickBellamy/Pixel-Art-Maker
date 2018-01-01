@@ -72,34 +72,34 @@ $(document).ready(function() {
     // D Adds column to the right, Shift + D removes column from the right
     $('body').keydown(function(e) {
         switch (e.which) {
-            case 87: // W
-                if (e.shiftKey) {
-                    removeRow('top');
-                } else {
-                    addRow('top');
-                }
-                break;
-            case 65: // A
-                if (e.shiftKey) {
-                    removeColumn('left');
-                } else {
-                    addColumn('left');
-                }
-                break;
-            case 83: // S
-                if (e.shiftKey) {
-                    removeRow('bottom');
-                } else {
-                    addRow('bottom');
-                }
-                break;
-            case 68: // D
-                if (e.shiftKey) {
-                    removeColumn('right');
-                } else {
-                    addColumn('right');
-                }
-                break;
+        case 87: // W
+            if (e.shiftKey) {
+                removeRow('top');
+            } else {
+                addRow('top');
+            }
+            break;
+        case 65: // A
+            if (e.shiftKey) {
+                removeColumn('left');
+            } else {
+                addColumn('left');
+            }
+            break;
+        case 83: // S
+            if (e.shiftKey) {
+                removeRow('bottom');
+            } else {
+                addRow('bottom');
+            }
+            break;
+        case 68: // D
+            if (e.shiftKey) {
+                removeColumn('right');
+            } else {
+                addColumn('right');
+            }
+            break;
         }
     })
 
@@ -227,7 +227,7 @@ $(document).ready(function() {
         colorHandler.addHoverEffectColor();
 
         // Bind mouseover for drag selection over <td>s
-        $('td').mouseover(function(e) {
+        $('td').mouseover(function() {
             if (mouseState.isRightMouseDown || (drawMode.isDeleteMode && mouseState.isLeftMouseDown)) {
                 // Right click resets ("deletes") the pixel by resetting bg colour
                 $(this).css('background-color', '#fff');
@@ -254,12 +254,12 @@ $(document).ready(function() {
         const GRID_WIDTH = $('tr:first td').length;
 
         for (let i = 0; i < GRID_WIDTH; i++) {
-            newRow += '<td></td>'
+            newRow += '<td></td>';
         }
         newRow += '</tr>';
 
         if (position === 'top') {
-            $('.pixel-canvas').prepend(newRow)
+            $('.pixel-canvas').prepend(newRow);
         } else if (position === 'bottom') {
             $('.pixel-canvas').append(newRow);
         }
@@ -302,7 +302,7 @@ $(document).ready(function() {
         const GRID_WIDTH = $('tr:first td').length;
         $('tr').each(function() {
             if (position === 'left') {
-                $(this).find('td:eq(0)').remove()
+                $(this).find('td:eq(0)').remove();
             } else if (position === 'right') {
                 $(this).find('td:eq(' + (GRID_WIDTH - 1).toString() + ')').remove();
             }
