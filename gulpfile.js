@@ -14,7 +14,7 @@ gulp.task('lint', () => {
     // So, it's best to have gulp ignore the directory as well. 
     // Also, Be sure to return the stream from the task; 
     // Otherwise, the task may end before the stream has finished. 
-    return gulp.src(['**/*.js','!node_modules/**'])
+    return gulp.src(['js/**/*.js','!node_modules/**'])
     // eslint() attaches the lint output to the "eslint" property 
     // of the file object so it can be used by other modules. 
         .pipe(eslint())
@@ -33,7 +33,7 @@ gulp.task('serve', ['styles'], function(){
     });
   
     gulp.watch('sass/**/*.scss', ['styles']);
-    gulp.watch('*.js', ['lint']);
+    gulp.watch('js/**/*.js', ['lint']);
 });
 
 // Compile sass into CSS, add vendor prefixes, and sync with browser
