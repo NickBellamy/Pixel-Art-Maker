@@ -6,6 +6,7 @@ var autoprefixer = require('gulp-autoprefixer');
 var browserSync = require('browser-sync').create();
 var eslint = require('gulp-eslint');
 var concat = require('gulp-concat');
+var uglify = require('gulp-uglifyes');
 
 // Default task
 gulp.task('default', ['copy-html', 'copy-images', 'styles', 'lint'], function(){
@@ -31,8 +32,9 @@ gulp.task('scripts', function(){
 
 // Task to handle js in production
 gulp.task('scripts-dist', function(){
-    gulp.src('js/**/*.js')
+    return gulp.src('js/**/*.js')
         .pipe(concat('all.js'))
+        .pipe(uglify())
         .pipe(gulp.dest('dist/js'));
 });
 
