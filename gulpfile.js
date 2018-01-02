@@ -7,6 +7,7 @@ var browserSync = require('browser-sync').create();
 var eslint = require('gulp-eslint');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglifyes');
+var sourcemaps = require('gulp-sourcemaps');
 
 // Default task
 gulp.task('default', ['copy-html', 'copy-images', 'styles', 'lint'], function(){
@@ -34,8 +35,10 @@ gulp.task('dist', [
 // Task to handle js in production
 gulp.task('scripts-dist', function(){
     return gulp.src('js/**/*.js')
+        .pipe(sourcemaps.init())
         .pipe(concat('all.js'))
         .pipe(uglify())
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest('dist/js'));
 });
 
@@ -72,10 +75,12 @@ gulp.task('copy-images', function(){
 // Compile sass into CSS, add vendor prefixes, and sync with browser
 gulp.task('styles', function(){
     gulp.src('sass/**/*.scss')
+        .pipe(sourcemaps.init())
         .pipe(sass().on('error', sass.logError))
         .pipe(autoprefixer({
             browsers: ['last 2 versions']
         }))
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest('dist/css'))
         .pipe(browserSync.stream());
 }); 
