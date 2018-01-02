@@ -194,7 +194,7 @@ $('.size-picker').submit(function(e) {
 function clearGrid() {
     // Must use while loop to comply with project specification
     // $('.pixel-canvas').empty(); would be cleaner
-    while ($('table tr').length > 0) {
+    while ($('table tr')) {
         $('tr:first').remove();
     }
 }
