@@ -7,8 +7,14 @@ var browserSync = require('browser-sync').create();
 var eslint = require('gulp-eslint');
 
 // Default task
-gulp.task('default', ['serve']);
+gulp.task('default', ['copy-html', 'copy-images', 'styles', 'lint', 'serve'], function(){
+    gulp.watch('sass/**/*.scss', ['styles']);
+    gulp.watch('js/**/*.js', ['lint']);
+    gulp.watch('/index.html', ['copy-html']);
+    gulp.watch('img/*', ['copy-images']);
+});
 
+// ESLint
 gulp.task('lint', () => {
     // ESLint ignores files with "node_modules" paths. 
     // So, it's best to have gulp ignore the directory as well. 
@@ -26,23 +32,32 @@ gulp.task('lint', () => {
         .pipe(eslint.failAfterError());
 });
 
-// Set up server and watch scss files
-gulp.task('serve', ['styles'], function(){
+// Set up server for browserSync
+gulp.task('serve', function(){
     browserSync.init({
         server: './'
     });
-  
-    gulp.watch('sass/**/*.scss', ['styles']);
-    gulp.watch('js/**/*.js', ['lint']);
+});
+
+// Copy HTML to dist folder
+gulp.task('copy-html', function(){
+    gulp.src('./index.html')
+        .pipe(gulp.dest('./dist'));
+});
+
+// Copy images to dist folder
+gulp.task('copy-images', function(){
+    gulp.src('img/*')
+        .pipe(gulp.dest('./dist/img'));
 });
 
 // Compile sass into CSS, add vendor prefixes, and sync with browser
-gulp.task('styles', ['lint'], function(){
+gulp.task('styles', function(){
     gulp.src('sass/**/*.scss')
         .pipe(sass().on('error', sass.logError))
         .pipe(autoprefixer({
             browsers: ['last 2 versions']
         }))
-        .pipe(gulp.dest('./css'))
+        .pipe(gulp.dest('dist/css'))
         .pipe(browserSync.stream());
 }); 
