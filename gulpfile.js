@@ -5,6 +5,7 @@ var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
 var browserSync = require('browser-sync').create();
 var eslint = require('gulp-eslint');
+var concat = require('gulp-concat');
 
 // Default task
 gulp.task('default', ['copy-html', 'copy-images', 'styles', 'lint'], function(){
@@ -19,6 +20,20 @@ gulp.task('default', ['copy-html', 'copy-images', 'styles', 'lint'], function(){
         //server: './'
         server: './dist'
     });
+});
+
+// Task to handle js in development
+gulp.task('scripts', function(){
+    gulp.src('js/**/*.js')
+        .pipe(concat('all.js'))
+        .pipe(gulp.dest('./js'));
+});
+
+// Task to handle js in production
+gulp.task('scripts-dist', function(){
+    gulp.src('js/**/*.js')
+        .pipe(concat('all.js'))
+        .pipe(gulp.dest('dist/js'));
 });
 
 // ESLint
