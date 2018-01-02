@@ -23,12 +23,13 @@ gulp.task('default', ['copy-html', 'copy-images', 'styles', 'lint'], function(){
     });
 });
 
-// Task to handle js in development
-gulp.task('scripts', function(){
-    gulp.src('js/**/*.js')
-        .pipe(concat('all.js'))
-        .pipe(gulp.dest('./js'));
-});
+gulp.task('dist', [
+    'copy-html',
+    'copy-images',
+    'styles',
+    'lint',
+    'scripts-dist'
+]);
 
 // Task to handle js in production
 gulp.task('scripts-dist', function(){
