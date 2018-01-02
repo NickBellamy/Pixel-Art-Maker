@@ -7,11 +7,18 @@ var browserSync = require('browser-sync').create();
 var eslint = require('gulp-eslint');
 
 // Default task
-gulp.task('default', ['copy-html', 'copy-images', 'styles', 'lint', 'serve'], function(){
+gulp.task('default', ['copy-html', 'copy-images', 'styles', 'lint'], function(){
     gulp.watch('sass/**/*.scss', ['styles']);
     gulp.watch('js/**/*.js', ['lint']);
-    gulp.watch('/index.html', ['copy-html']);
+    gulp.watch('./dist/index.html').on('change', browserSync.reload);
+    gulp.watch('./index.html', ['copy-html']);
     gulp.watch('img/*', ['copy-images']);
+
+    // Browser Sync; change server between './' for dev and './dist' for production
+    browserSync.init({
+        //server: './'
+        server: './dist'
+    });
 });
 
 // ESLint
@@ -30,13 +37,6 @@ gulp.task('lint', () => {
     // To have the process exit with an error code (1) on 
     // lint error, return the stream and pipe to failAfterError last. 
         .pipe(eslint.failAfterError());
-});
-
-// Set up server for browserSync
-gulp.task('serve', function(){
-    browserSync.init({
-        server: './'
-    });
 });
 
 // Copy HTML to dist folder
